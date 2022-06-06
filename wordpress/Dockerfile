@@ -1,0 +1,12 @@
+FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y php-cgi php-redis php-common php-fpm php-pear php-mbstring php-zip php-net-socket php-gd php-xml-util php-gettext php-mysql php-bcmath unzip wget git vim -y
+WORKDIR /var/www/html/
+RUN wget https://wordpress.org/latest.tar.gz
+RUN tar -xvzf latest.tar.gz
+RUN rm -rf latest.tar.gz
+WORKDIR /var/www/html/wordpress/
+RUN cp wp-config-sample.php wp-config.php
+RUN sed -i -e 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
+RUN chown -R www-data:www-data /var/www/html/wordpress 
+RUN mkdir /run/php
+ENTRYPOINT sed -i -e "s/database_name_here/karroch/g" /var/www/html/wordpress/wp-config.php && sed -i -e "s/username_here/aazeroua/g" /var/www/html/wordpress/wp-config.php && sed -i -e "s/password_here/karroch/g" /var/www/html/wordpress/wp-config.php && sed -i -e "s/localhost/mysql/g" /var/www/html/wordpress/wp-config.php && php-fpm7.3 --nodaemonize

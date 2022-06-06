@@ -1,0 +1,39 @@
+version: '3.6'
+services:
+  mysql:
+    build:
+      context: mysql
+      dockerfile: Dockerfile
+    image: mysql
+    container_name: mysql
+    ports:
+      - 3306:3306
+    env_file: mysql/.env
+  # wordpress:
+  #   build:
+  #     context: /wordpress
+  #     dockerfile: Dockerfile
+  #   image: wordpress
+  #   container_name: wordpress
+  #   ports:
+  #     - 9000:9000
+  #   env_file: wordpress/.env
+  # nginx:
+  #   build:
+  #     context: /nginx
+  #     dockerfile: Dockerfile
+  #   image: nginx
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
+  #   env_file: nginx/.env
+  phpmyadmin:
+    build:
+      context: phpmyadmin
+      dockerfile: Dockerfile
+    image: phpmyadmin
+    restart: always
+    container_name: phpmyadmin
+    ports:
+      - 80:80
+    env_file: phpmyadmin/.env
