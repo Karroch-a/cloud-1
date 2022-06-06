@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM debian:buster
 RUN apt-get update && apt-get install -y php-cgi php-redis php-common php-fpm php-pear php-mbstring php-zip php-net-socket php-gd php-xml-util php-gettext php-mysql php-bcmath unzip wget git vim -y
 WORKDIR /var/www/html/
 RUN wget https://wordpress.org/latest.tar.gz
