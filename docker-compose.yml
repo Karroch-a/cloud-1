@@ -9,24 +9,21 @@ services:
     ports:
       - 3306:3306
     env_file: mysql/.env
-  # wordpress:
-  #   build:
-  #     context: /wordpress
-  #     dockerfile: Dockerfile
-  #   image: wordpress
-  #   container_name: wordpress
-  #   ports:
-  #     - 9000:9000
-  #   env_file: wordpress/.env
-  # nginx:
-  #   build:
-  #     context: /nginx
-  #     dockerfile: Dockerfile
-  #   image: nginx
-  #   container_name: nginx
-  #   ports:
-  #     - 80:80
-  #   env_file: nginx/.env
+    volumes:
+      - DB:/var/lib/mysql
+  wordpress:
+    build:
+      context: wordpress
+      dockerfile: Dockerfile
+    image: wordpress
+    container_name: wordpress
+    ports:
+      - 9000:9000
+    env_file: wordpress/.env
+    volumes:
+      - Cloud:/var/www/wordpress
+    depends_on:
+      - mysql
   phpmyadmin:
     build:
       context: phpmyadmin
@@ -35,7 +32,28 @@ services:
     restart: always
     container_name: phpmyadmin
     env_file: phpmyadmin/.env
-  volumes:
-      - Cloud:/var/www/
+    ports:
+      - 5000:5000
+    volumes:
+      - Cloud1:/var/www/phpmyadmin
+    depends_on:
+      - mysql
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: nginx
+    volumes:
+      - Cloud:/var/www/wordpress
+      - Cloud1:/var/www/phpmyadmin
+    ports:
+      - 80:80
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - wordpress
 volumes:
   Cloud:
+  Cloud1:
+  DB:
