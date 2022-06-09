@@ -9,6 +9,7 @@ services:
     ports:
       - 3306:3306
     env_file: mysql/.env
+    restart: always
     volumes:
       - DB:/var/lib/mysql
   wordpress:
@@ -50,6 +51,7 @@ services:
     ports:
       - 80:80
       - 8080:8080
+      - 443:443
     restart: on-failure
     depends_on:
       - wordpress
