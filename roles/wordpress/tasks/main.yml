@@ -12,6 +12,9 @@
     state: started
     pull: no
     restart: yes
+    env:
+      Ip: '{{ machine_ip }}'
+      Url: '{{ machine_url }}'
     env_file: /root/Dockerfiles/.env
     ports:
      - "9000:9000"
