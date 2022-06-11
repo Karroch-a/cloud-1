@@ -1,0 +1,23 @@
+- name: build phpmyadmin image
+  docker_image:
+    name: phpmyadmin
+    build:
+      path: /root/Dockerfiles/phpmyadmin/
+    source: build
+    state: present
+- name: create phpmyadmin container
+  docker_container:
+    name: phpmyadmin
+    image: phpmyadmin
+    state: started
+    pull: no
+    restart: yes
+    env_file: /root/Dockerfiles/.env
+    ports:
+     - "5000:5000"
+    volumes:
+     - Cloud1:/var/www/phpmyadmin
+    networks:
+      - name: cloud-1
+        ipv4_address: "10.12.81.12"
+    

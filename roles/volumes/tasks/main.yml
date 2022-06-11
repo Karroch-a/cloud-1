@@ -1,0 +1,9 @@
+- name: Create a phpmyadmin volume
+  docker_volume:
+    name: Cloud
+- name: Create a wordpress volume
+  docker_volume:
+    name: Cloud1
+- name: Create a database volume
+  docker_volume:
+    name: DB

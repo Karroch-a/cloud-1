@@ -1,0 +1,22 @@
+- name: build wordpress image
+  docker_image:
+    name: wordpress
+    build:
+      path: /root/Dockerfiles/wordpress/
+    source: build
+    state: present
+- name: create wordpress container
+  docker_container:
+    name: wordpress
+    image: wordpress
+    state: started
+    pull: no
+    restart: yes
+    env_file: /root/Dockerfiles/.env
+    ports:
+     - "9000:9000"
+    volumes:
+     - Cloud:/var/www/wordpress
+    networks:
+      - name: cloud-1
+        ipv4_address: "10.12.81.13"

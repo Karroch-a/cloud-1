@@ -1,0 +1,26 @@
+- name: build nginx image
+  docker_image:
+    name: nginx
+    build:
+      path: /root/Dockerfiles/nginx/
+    source: build
+    state: present
+- name: create nginx container
+  docker_container:
+    name: nginx
+    image: nginx
+    state: started
+    pull: no
+    restart: yes
+    env_file: /root/Dockerfiles/.env
+    ports:
+     - "80:80"
+     - "443:443"
+     - "8080:8080"
+    volumes:
+     - Cloud:/var/www/wordpress
+     - Cloud1:/var/www/phpmyadmin
+    networks:
+      - name: cloud-1
+        ipv4_address: "10.12.81.11"
+    

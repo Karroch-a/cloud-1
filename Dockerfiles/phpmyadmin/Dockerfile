@@ -6,6 +6,6 @@ WORKDIR /var/www/
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-english.tar.xz
 RUN tar -xf phpMyAdmin-5.2.0-english.tar.xz && rm -fr phpMyAdmin-5.2.0-english.tar.xz && mv phpMyAdmin-5.2.0-english phpmyadmin
 RUN mv /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
-RUN sed -i 's/localhost/mysql/g' /var/www/phpmyadmin/config.inc.php
+RUN sed -i 's/localhost/${DB_HOST}/g' /var/www/phpmyadmin/config.inc.php
 RUN mkdir /run/php
 CMD ["php-fpm7.3", "--nodaemonize"]

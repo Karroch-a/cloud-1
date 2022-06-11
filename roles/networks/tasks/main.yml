@@ -1,0 +1,7 @@
+- name: Create a network
+  docker_network:
+    name: cloud-1
+    ipam_config:
+      - subnet: 10.12.81.0/24
+        gateway: 10.12.81.2
+        iprange: 10.12.81.0/26

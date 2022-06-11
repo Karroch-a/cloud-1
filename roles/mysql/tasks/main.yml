@@ -1,0 +1,21 @@
+- name: build myqsl image
+  docker_image:
+    name: mysql
+    build:
+      path: /root/Dockerfiles/mysql/
+    source: build
+    state: present
+- name: create mysql container
+  docker_container:
+    name: mysql
+    image: mysql
+    state: started
+    pull: no
+    restart: yes
+    ports:
+     - "3306:3306"
+    volumes:
+     - DB:/var/lib/mysql
+    networks:
+      - name: cloud-1
+        ipv4_address: "10.12.81.10"
