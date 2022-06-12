@@ -1,0 +1,70 @@
+- name: Stop MYSQL Container
+  docker_container:
+    name: mysql
+    state: stopped
+  tags:
+    - stop_mysql
+- name: Stop Nginx Container
+  docker_container:
+    name: nginx
+    state: stopped
+  tags:
+    - stop_nginx
+- name: Stop Wordpress Container
+  docker_container:
+    name: wordpress
+    state: stopped
+  tags:
+    - stop_wordpress
+- name: Stop Phpmyadmin Container
+  docker_container:
+    name: phpmyadmin
+    state: stopped
+  tags:
+    - stop_phpmyadmin
+- name: Start MYSQL Container
+  docker_container:
+    name: mysql
+    state: started
+  tags:
+    - start_mysql
+- name: Start nginx Container
+  docker_container:
+    name: nginx
+    state: started
+  tags:
+    - start_nginx
+- name: Start phpmyadmin Container
+  docker_container:
+    name: phpmyadmin
+    state: started
+  tags:
+    - start_phpmyadmin
+- name: Start wordpress Container
+  docker_container:
+    name: wordpress
+    state: started
+  tags:
+    - start_wordpress
+- name: Stop running containers
+  docker_container:
+    name: "{{ item }}"
+    state: stopped
+  tags:
+    stop_all
+  loop: 
+    - mysql
+    - phpmyadmin
+    - nginx
+    - wordpress
+- name: Start offline containers
+  docker_container:
+    name: "{{ item }}"
+    state: started
+  tags:
+    start_all
+  loop: 
+    - mysql
+    - phpmyadmin
+    - nginx
+    - wordpress

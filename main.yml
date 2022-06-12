@@ -1,10 +1,11 @@
 - name: Deploy 
   hosts: hosts
   roles:
-    - requirements
-    - volumes
-    - networks
-    - mysql
-    - phpmyadmin
-    - nginx
-    - wordpress
+    # - requirements
+    # - volumes
+    # - networks
+    # - mysql
+    # - phpmyadmin
+    # - nginx
+    # - wordpress
+    - services
