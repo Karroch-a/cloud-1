@@ -12,6 +12,7 @@
     state: started
     pull: no
     restart: yes
+    restart_policy: always
     env_file: /root/Dockerfiles/.env
     ports:
      - "5000:5000"

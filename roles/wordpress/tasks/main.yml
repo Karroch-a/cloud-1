@@ -12,6 +12,7 @@
     state: started
     pull: no
     restart: yes
+    restart_policy: always
     env:
       Ip: '{{ machine_ip }}'
       Url: '{{ machine_url }}'
