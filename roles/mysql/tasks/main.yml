@@ -13,8 +13,8 @@
     pull: no
     restart: yes
     restart_policy: always
-    ports:
-     - "3306:3306"
+    exposed_ports:
+     - 3306
     volumes:
      - DB:/var/lib/mysql
     networks:

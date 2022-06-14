@@ -17,8 +17,8 @@
       Ip: '{{ machine_ip }}'
       Url: '{{ machine_url }}'
     env_file: /root/Dockerfiles/.env
-    ports:
-     - "9000:9000"
+    exposed_ports:
+     - 9000
     volumes:
      - Cloud:/var/www/wordpress
     networks:

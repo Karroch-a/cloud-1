@@ -14,8 +14,8 @@
     restart: yes
     restart_policy: always
     env_file: /root/Dockerfiles/.env
-    ports:
-     - "5000:5000"
+    exposed_ports:
+     - 5000
     volumes:
      - Cloud1:/var/www/phpmyadmin
     networks:
